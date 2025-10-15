@@ -13,7 +13,9 @@ transformers==4.37.2
 # 🔽 與 diffusers 0.27 最穩定組合
 accelerate==0.25.0  
 # ✅ 明確鎖定，支援 Python 3.8.10
-filelock==3.8.0            
+filelock==3.8.0 
+# ✅ 強制降版，修復 Python 3.8 衝突
+networkx==2.8.8
 
 # --- Video & Audio ---
 opencv-python==4.9.0.80
