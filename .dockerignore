@@ -10,6 +10,7 @@ models/
 outputs/
 logs/
 checkpoints/
+weights/
 
 # 忽略前端或非必要套件
 node_modules/
