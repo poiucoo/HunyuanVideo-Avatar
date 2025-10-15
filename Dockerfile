@@ -6,10 +6,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 ENV PYTHONUNBUFFERED=1
 
-# 🧩 安裝必要套件（包含 ffmpeg）
+# 🧩 安裝必要套件（包含 ffmpeg 與 curl）
 RUN apt-get update && apt-get install -y \
     git \
     ffmpeg \
+    curl \
     python3-pip \
     python3-dev \
     libsm6 \
@@ -29,7 +30,7 @@ RUN pip install --no-cache-dir --upgrade pip && \
 RUN pip install --no-cache-dir -r requirements.txt && \
     pip install --no-cache-dir runpod tomlkit==0.12.2
 
-# 🚦 健康檢查
+# 🚦 健康檢查（確保 curl 可用）
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
  CMD curl -f http://localhost:7860/health || exit 1
 
