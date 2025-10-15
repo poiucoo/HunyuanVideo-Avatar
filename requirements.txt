@@ -10,7 +10,7 @@ loguru==0.7.2
 imageio==2.34.0
 imageio-ffmpeg==0.5.1
 safetensors==0.4.3
-gradio==4.42.0
+gradio>=4.44,<5
 fastapi==0.115.12
 uvicorn==0.34.2
 decord==0.6.0
