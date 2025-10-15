@@ -84,7 +84,9 @@ def create_demo():
             
     return demo
 
+# ✅ 提前建立 demo，供外部引用 (handler.py)
+demo = create_demo()
+
 if __name__ == "__main__":
     allowed_paths = ['/']
-    demo = create_demo()
     demo.launch(server_name='0.0.0.0', server_port=8080, share=True, allowed_paths=allowed_paths)
