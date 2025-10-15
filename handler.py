@@ -1,7 +1,8 @@
 import runpod
-from gradio_server import main
+from hymm_gradio import app
 
 def handler(event):
-    return main(event)
+    app.demo.launch()
+    return {"status": "Avatar service started."}
 
 runpod.serverless.start({"handler": handler})
