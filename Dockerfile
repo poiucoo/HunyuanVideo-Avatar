@@ -3,8 +3,7 @@ FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 # ✅ 避免 tzdata 互動卡住 + 設定時區
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
-ENV PYTHONUNBUFFERED=1
-# ⚡ 立即輸出 log，不延遲
+ENV PYTHONUNBUFFERED=1  # ⚡立即輸出 log，不延遲
 
 # 🧩 安裝必要套件（含 ffmpeg）
 RUN apt-get update && apt-get install -y \
@@ -23,6 +22,12 @@ COPY . /workspace
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN pip install runpod
+
+# 🩹 修正 gradio / tomlkit 衝突（必加）
+RUN pip install tomlkit==0.12.0 --force-reinstall
+
+# ✅ 保險行，避免 pip 警告導致 build fail
+RUN true
 
 # 🚦 健康檢查：每 30 秒請求一次 /health，若失敗重啟
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
