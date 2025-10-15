@@ -1,21 +1,25 @@
 # 忽略版本控制與快取
 .git/
+.gitignore
 __pycache__/
 .cache/
-venv/
 .DS_Store
+venv/
+temp/
+.runpod/
+.gradio/
 
-# 忽略大型模型與輸出資料
+# 忽略大型模型與暫存資料
 models/
+weights/
+checkpoints/
+assets/
 outputs/
 logs/
-checkpoints/
-weights/
+data/
+datasets/
 
-# 忽略前端或非必要套件
-node_modules/
-
-# 忽略影片與圖片等媒體檔
+# 忽略媒體與影像檔
 *.mp4
 *.mov
 *.avi
@@ -24,7 +28,7 @@ node_modules/
 *.png
 *.gif
 
-# 忽略深度學習權重與模型檔案
+# 忽略深度學習權重檔案
 *.pt
 *.pth
 *.ckpt
