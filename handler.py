@@ -1,6 +1,6 @@
 import runpod
 import time
-from hymm_gradio import app
+from hymm_gradio import gradio_audio as app
 from fastapi import FastAPI
 from threading import Thread
 
