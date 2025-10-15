@@ -1,6 +1,16 @@
+# 忽略不必要的檔案和大型資料夾
 .git/
 __pycache__/
 .cache/
-outputs/
 models/
+outputs/
+logs/
 venv/
+node_modules/
+*.mp4
+*.jpg
+*.png
+*.pt
+*.pth
+*.ckpt
+*.safetensors
