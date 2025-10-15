@@ -1,15 +1,17 @@
-FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
+# 🚀 基於輕量 CUDA Runtime，而非整包 PyTorch image
+FROM nvidia/cuda:12.1.0-runtime-ubuntu20.04
 
-# ✅ 避免 tzdata 互動卡住 + 設定時區
+# ✅ 基本設定
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
-# ⚡ 立即輸出 log，不延遲
 ENV PYTHONUNBUFFERED=1
 
-# 🧩 安裝必要套件（含 ffmpeg）
+# 🧩 安裝必要套件（包含 ffmpeg）
 RUN apt-get update && apt-get install -y \
     git \
     ffmpeg \
+    python3-pip \
+    python3-dev \
     libsm6 \
     libxext6 \
     tzdata \
@@ -19,22 +21,24 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /workspace
 COPY . /workspace
 
-# 🐍 安裝 Python 套件
-RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-RUN pip install runpod
-# ✅ 解決 Gradio 與 RunPod 的 tomlkit 衝突
-RUN pip install "tomlkit==0.12.2" --force-reinstall
+# 🐍 安裝 PyTorch（指定 CUDA 版本）
+RUN pip install --upgrade pip && \
+    pip install torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
 
-# ✅ 保險行，避免 pip 警告導致 build fail
-RUN true
+# 🧠 安裝必要的 Python 套件（gradio, transformers, runpod 等）
+RUN pip install -r requirements.txt \
+ && pip install runpod tomlkit==0.12.2 \
+ && pip cache purge
 
-# 🚦 健康檢查：每 30 秒請求一次 /health，若失敗重啟
+# 🚦 健康檢查
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
  CMD curl -f http://localhost:7860/health || exit 1
 
-# 🌐 對外開放埠口（Hunyuan / Gradio / API）
+# 🌐 對外埠口
 EXPOSE 7860
 
+# 🧹 清理暫存，減少鏡像體積
+RUN rm -rf /root/.cache /tmp/* /var/tmp/*
+
 # 🚀 啟動應用
-CMD ["python", "handler.py"]
+CMD ["python3", "handler.py"]
