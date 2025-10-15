@@ -25,7 +25,7 @@ COPY . /workspace
 # 🐍 安裝 PyTorch（指定 CUDA 版本）
 # ✅ 加上 "torchvision==0.16.0" 後明確設定 CUDA index-url，避免預設拉 CPU 版
 RUN pip install --no-cache-dir --upgrade pip && \
-    pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
+    pip install --no-cache-dir torch==2.0.1 torchvision==0.15.2 --index-url https://download.pytorch.org/whl/cu118
 
 # 🧠 安裝必要 Python 套件
 # ✅ 移除重複安裝 runpod/tomlkit，讓版本統一由 requirements.txt 管理
