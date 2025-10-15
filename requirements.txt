@@ -13,15 +13,13 @@ safetensors==0.4.3
 
 # --- Diffusion / Transformer Stack ---
 # 🔽 降版以支援 Py3.8，避免拉新 filelock
-diffusers==0.27.2     
+diffusers==0.27.2
 # 🔽 降版，v4.45.1 會觸發 filelock>=3.9 衝突
-transformers==4.37.2  
+transformers==4.37.2
 # 🔽 與 diffusers 0.27 最穩定組合
-accelerate==0.25.0  
+accelerate==0.25.0
 # ✅ 明確鎖定，支援 Python 3.8.10
-filelock==3.8.0 
-# ✅ 強制降版，修復 Python 3.8 衝突
-networkx==2.8.8
+filelock==3.8.0
 
 # --- Video & Audio ---
 opencv-python==4.9.0.80
@@ -33,9 +31,9 @@ scikit-video==1.1.11
 
 # --- Web Interface ---
 # 🔽 新版不支援 Py3.8
-gradio==4.29.0 
+gradio==4.29.0
 # 🔽 新版需要 typing_extensions>=4.12
-fastapi==0.103.1           
+fastapi==0.103.1
 uvicorn==0.23.2
 
 # --- Infra / Runtime ---
