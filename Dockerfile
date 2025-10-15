@@ -3,7 +3,8 @@ FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 # ✅ 避免 tzdata 互動卡住 + 設定時區
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
-ENV PYTHONUNBUFFERED=1  # ⚡立即輸出 log，不延遲
+# ⚡立即輸出 log，不延遲
+ENV PYTHONUNBUFFERED=1  
 
 # 🧩 安裝必要套件（含 ffmpeg）
 RUN apt-get update && apt-get install -y \
