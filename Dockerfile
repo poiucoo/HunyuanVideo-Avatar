@@ -1,7 +1,9 @@
 FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
-# 🧩 新增兩行避免 tzdata 卡住
+# ✅ 避免 tzdata 互動卡住 + 設定時區
 ENV DEBIAN_FRONTEND=noninteractive
+ENV TZ=Etc/UTC
+
 RUN apt-get update && apt-get install -y \
     git \
     ffmpeg \
