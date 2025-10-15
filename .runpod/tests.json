@@ -1,0 +1,12 @@
+{
+  "tests": [
+    {
+      "name": "avatar_generation_test",
+      "input": {
+        "image": "https://example.com/avatar.jpg",
+        "audio": "https://example.com/audio.wav"
+      },
+      "timeout": 600000
+    }
+  ]
+}
