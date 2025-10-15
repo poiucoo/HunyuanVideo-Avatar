@@ -278,4 +278,8 @@ If you find [HunyuanVideo-Avatar](https://arxiv.org/pdf/2505.20156) useful for y
 
 We would like to thank the contributors to the [HunyuanVideo](https://github.com/Tencent/HunyuanVideo), [SD3](https://huggingface.co/stabilityai/stable-diffusion-3-medium), [FLUX](https://github.com/black-forest-labs/flux), [Llama](https://github.com/meta-llama/llama), [LLaVA](https://github.com/haotian-liu/LLaVA), [Xtuner](https://github.com/InternLM/xtuner), [diffusers](https://github.com/huggingface/diffusers) and [HuggingFace](https://huggingface.co) repositories, for their open research and exploration. 
 
+## 🚀 Deploy on RunPod
+Click the badge below to instantly launch **HunyuanVideo-Avatar** on RunPod GPU cloud.
+
 [![RunPod](https://api.runpod.io/badge/poiuc00/HunyuanVideo-Avatar)](https://console.runpod.io/hub/poiuc00/HunyuanVideo-Avatar)
+
