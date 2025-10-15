@@ -1,11 +1,17 @@
 {
   "title": "HunyuanVideo-Avatar",
-  "description": "Audio-driven digital human generation model based on HunyuanVideo.",
+  "description": "Tencent HunyuanVideo-Avatar: A framework for digital human (avatar) video generation.",
   "type": "serverless",
   "category": "video",
-  "iconUrl": "https://raw.githubusercontent.com/Tencent-Hunyuan/HunyuanVideo-Avatar/main/assets/logo.png",
+  "iconUrl": "https://avatars.githubusercontent.com/u/50753197?s=200&v=4",
   "config": {
-    "runtime": "GPU",
+    "runpod": "GPU",
     "containerDiskInGb": 30
-  }
+  },
+  "presets": [
+    {
+      "name": "default",
+      "scale": "RTX_4090"
+    }
+  ]
 }
