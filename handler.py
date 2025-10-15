@@ -1,4 +1,5 @@
 import runpod
+import time
 from hymm_gradio import app
 from fastapi import FastAPI
 from threading import Thread
@@ -12,6 +13,7 @@ def health():
 
 # ✅ 啟動 Gradio 應用於背景
 def start_gradio():
+    print("🧠 Launching Gradio interface...")
     app.demo.launch(share=False, server_name="0.0.0.0", server_port=7860)
 
 # ✅ RunPod handler
@@ -23,8 +25,11 @@ def handler(event):
     print(f"🎬 Starting avatar generation:\n Image: {image_url}\n Audio: {audio_url}")
 
     # 🧠 使用背景執行緒啟動 Gradio（避免阻塞）
-    thread = Thread(target=start_gradio)
+    thread = Thread(target=start_gradio, daemon=True)
     thread.start()
+
+    # ⏳ 稍作等待，確保 Gradio 啟動完成
+    time.sleep(5)
 
     return {
         "status": "Avatar service started",
