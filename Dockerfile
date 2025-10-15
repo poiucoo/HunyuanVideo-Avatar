@@ -22,13 +22,12 @@ WORKDIR /workspace
 COPY . /workspace
 
 # 🐍 安裝 PyTorch（指定 CUDA 版本）
-RUN pip install --upgrade pip && \
-    pip install torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
 
 # 🧠 安裝必要的 Python 套件（gradio, transformers, runpod 等）
-RUN pip install -r requirements.txt \
- && pip install runpod tomlkit==0.12.2 \
- && pip cache purge
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir runpod tomlkit==0.12.2
 
 # 🚦 健康檢查
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
