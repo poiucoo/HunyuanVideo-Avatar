@@ -1,5 +1,5 @@
-# 🚀 基於輕量 CUDA 12.1 Runtime（官方 Nvidia），非整包 PyTorch Image
-FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
+# 🚀 基於輕量 CUDA 12.1 Runtime（官方 PyTorch with Python 3.10）
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime-py310
 
 # ✅ 基本設定
 ENV DEBIAN_FRONTEND=noninteractive
@@ -11,8 +11,6 @@ RUN apt-get update && apt-get install -y \
     git \
     ffmpeg \
     curl \
-    python3-pip \
-    python3-dev \
     libsm6 \
     libxext6 \
     tzdata \
@@ -22,8 +20,8 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /workspace
 COPY . /workspace
 
-# 🐍 安裝 CUDA 12.1 對應的 PyTorch
-# ✅ 關鍵：確保安裝 GPU 版 torch/cu121，而不是 CPU 版
+# 🐍 安裝 CUDA 12.1 對應的 PyTorch（GPU 版）
+# ✅ 已內建 PyTorch 2.1.0，這行確保 torch/cu121 完整性（可重複安裝一次無礙）
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
 
