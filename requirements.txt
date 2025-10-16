@@ -1,40 +1,42 @@
 # --- Environment Locks ---
 pip==24.0
-setuptools==65.5.1
-wheel==0.40.0
-networkx==2.8.8
+# ✅ 升版避免與新版 wheel/pip 衝突
+setuptools==68.2.2 
+# ✅ 支援 torch 2.1.0 whl 編譯
+wheel==0.41.3     
+# ✅ 與 torch 2.1.0 相容
+networkx==3.1               
 
 # --- Core & ML Dependencies ---
-numpy==1.24.4
+# ✅ torch 2.1.0 官方對應版本
+numpy==1.26.4               
 einops==0.7.0
 tqdm==4.66.2
 loguru==0.7.2
 safetensors==0.4.3
 
 # --- Diffusion / Transformer Stack ---
-# 🔽 降版以支援 Py3.8，避免拉新 filelock
-diffusers==0.27.2
-# 🔽 降版，v4.45.1 會觸發 filelock>=3.9 衝突
-transformers==4.37.2
-# 🔽 與 diffusers 0.27 最穩定組合
-accelerate==0.25.0
-# ✅ 明確鎖定，支援 Python 3.8.10
-filelock==3.8.0
+# 🔽 與 torch 2.1 相容版本（仍保留原註解結構）
+diffusers==0.28.2
+transformers==4.38.1
+accelerate==0.27.2
+filelock==3.12.2
 
 # --- Video & Audio ---
 opencv-python==4.9.0.80
 imageio==2.34.0
 imageio-ffmpeg==0.5.1
 decord==0.6.0
-librosa==0.11.0
+# ✅ 修正與 numpy 1.26 dtype 警告
+librosa==0.12.0             
 scikit-video==1.1.11
 
 # --- Web Interface ---
-# 🔽 新版不支援 Py3.8
-gradio==4.29.0
-# 🔽 新版需要 typing_extensions>=4.12
-fastapi==0.103.1
-uvicorn==0.23.2
+# ✅ 改進 torch 2.1 兼容性與新版 UI
+gradio==4.35.0  
+# ✅ 支援 pydantic v2
+fastapi==0.110.0            
+uvicorn==0.29.0
 
 # --- Infra / Runtime ---
 runpod==1.7.13
