@@ -1,5 +1,5 @@
 # 🚀 基於輕量 CUDA 12.1 Runtime（官方 PyTorch with Python 3.10）
-FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime-py310
+FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
 # ✅ 基本設定
 ENV DEBIAN_FRONTEND=noninteractive
