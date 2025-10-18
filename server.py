@@ -3,7 +3,12 @@ import os, subprocess, requests
 
 app = FastAPI()
 
-# ✅ 健康檢查（讓 RunPod 可以確認容器存活）
+# ✅ 根路由：RunPod 會用這個確認容器是否啟動
+@app.get("/")
+def root():
+    return {"status": "running"}
+
+# ✅ 健康檢查（保險起見）
 @app.get("/health")
 def health():
     return {"status": "ok"}
