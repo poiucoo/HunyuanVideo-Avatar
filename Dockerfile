@@ -20,25 +20,25 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /workspace
 COPY . /workspace
 
-# 🐍 安裝 CUDA 12.1 對應的 PyTorch（GPU 版）
-# ✅ 已內建 PyTorch 2.1.0，這行確保 torch/cu121 完整性（可重複安裝一次無礙）
+# 🧠 安裝 CUDA 12.1 對應的 PyTorch（GPU 版）
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
 
-# 🧠 安裝其餘依賴（requirements.txt）
+# 🧩 安裝依賴
 RUN pip install --no-cache-dir -r requirements.txt
 
-# 🚦 健康檢查（確保伺服器啟動後可被 RunPod ping）
+# 🚦 健康檢查
+# ⚠️ Serverless 健康檢查預設會 ping 5000 port（不是 7860）
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
- CMD curl -f http://localhost:7860/health || exit 1
+ CMD curl -f http://localhost:5000/ || exit 1
 
-# 🌐 對外埠口
-EXPOSE 7860
+# 🌐 對外埠口（Serverless 固定用 5000）
+EXPOSE 5000
 
-# 🧹 清理暫存，進一步減少鏡像體積
+# 🧹 清理暫存
 RUN pip cache purge && \
     apt-get clean && \
     rm -rf /root/.cache /tmp/* /var/tmp/* /var/lib/apt/lists/*
 
-# 🚀 啟動應用
-CMD ["python3", "handler.py"]
+# 🚀 啟動 FastAPI 應用
+CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "5000"]
