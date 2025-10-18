@@ -1,14 +1,13 @@
-# --- Core Environment ---
 fastapi==0.103.1
 uvicorn==0.23.2
 torch==2.1.0
 torchaudio
-numpy
+diffusers==0.28.2
+transformers==4.38.1
+huggingface_hub
 opencv-python
 imageio
 imageio-ffmpeg
 soundfile
 tqdm
-diffusers==0.28.2
-transformers==4.38.1
-huggingface_hub
+numpy
