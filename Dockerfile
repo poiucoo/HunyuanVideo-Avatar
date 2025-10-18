@@ -36,4 +36,4 @@ HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
  CMD curl -f http://localhost:5000/ || exit 1
 
 # ▶️ 啟動 RunPod Serverless handler
-CMD ["python", "server.py"]
+CMD ["python", "handler.py"]
