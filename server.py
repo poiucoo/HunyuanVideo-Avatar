@@ -29,7 +29,7 @@ def handler(event):
 
     # 執行推理命令
     cmd = [
-        "python", "inference.py",
+        "python", "hymm_sp/inference.py",
         "--config", "configs/hunyuan_avatar.yaml",
         "--image_path", image_path,
         "--audio_path", audio_path,
