@@ -1,6 +1,8 @@
 # === 基本框架 ===
 runpod==1.4.0
 requests==2.31.0
+fastapi==0.103.1
+uvicorn==0.23.2
 
 # === 深度學習環境 ===
 torch==2.1.0
@@ -11,16 +13,24 @@ torchaudio==2.1.0
 diffusers==0.28.2
 transformers==4.38.1
 huggingface_hub==0.23.0
+safetensors==0.4.3
+accelerate==0.27.2
+filelock==3.8.0
 
 # === 影像與影片處理 ===
 opencv-python==4.9.0.80
 imageio==2.34.0
 imageio-ffmpeg==0.4.9
+decord==0.6.0
 numpy==1.26.4
+scikit-video==1.1.11
 
 # === 音訊處理 ===
 soundfile==0.12.1
+librosa==0.11.0
 
 # === 其他輔助套件 ===
 tqdm==4.66.4
 loguru==0.7.2
+einops==0.7.0
+tomlkit==0.12.2
