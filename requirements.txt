@@ -35,4 +35,5 @@ loguru==0.7.2
 einops==0.7.0
 tomlkit==0.12.2
 
-flash-attn==2.3.6
+# === FlashAttention（使用預編譯版，避免重編譯）=== 
+flash-attn --no-build-isolation
