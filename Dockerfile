@@ -1,11 +1,12 @@
+# 🚀 基於輕量 CUDA 12.1 Runtime（官方 PyTorch with Python 3.10）
 FROM pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime
 
-# ✅ 避免 tzdata 互動卡住 + 設定時區
+# ✅ 基本設定
 ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 ENV PYTHONUNBUFFERED=1
 
-# 🧩 安裝必要系統套件
+# 🧩 安裝必要套件（包含 ffmpeg、curl）
 RUN apt-get update && apt-get install -y \
     git \
     ffmpeg \
@@ -19,20 +20,20 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /workspace
 COPY . /workspace
 
-# 🐍 安裝 Python 與 PyTorch 套件
+# 🐍 安裝 PyTorch GPU 對應版本
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
 
-# 📦 安裝 requirements.txt + FastAPI 相關依賴
+# 📦 安裝依賴（requirements.txt + runpod）
 RUN pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir runpod python-multipart
+    pip install --no-cache-dir runpod requests
 
-# 🌐 RunPod Serverless 走 5000 port
+# 🌐 RunPod Serverless 預設使用 port 5000
 EXPOSE 5000
 
-# 🚦 健康檢查（可留）
+# 🚦 健康檢查
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
  CMD curl -f http://localhost:5000/ || exit 1
 
-# ▶️ 啟動 FastAPI 服務
-CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "5000"]
+# ▶️ 啟動 RunPod Serverless handler
+CMD ["python", "server.py"]
