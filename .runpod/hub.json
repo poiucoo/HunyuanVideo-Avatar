@@ -1,12 +1,12 @@
 {
-  "title": "HunyuanVideo-Avatar-API",
-  "description": "FastAPI-based HunyuanVideo Avatar generation API",
+  "title": "HunyuanVideo-Avatar API",
+  "description": "FastAPI API for Tencent HunyuanVideo Avatar — auto-downloads model and generates avatar videos from image + audio.",
   "type": "serverless",
   "category": "video",
   "iconUrl": "https://avatars.githubusercontent.com/u/50753197?s=200&v=4",
   "config": {
     "runpod": "GPU",
-    "containerDiskInGb": 50
+    "containerDiskInGb": 60
   },
   "presets": [
     {
