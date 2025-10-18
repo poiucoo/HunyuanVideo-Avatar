@@ -25,7 +25,9 @@ RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
 
 # 📦 安裝依賴（requirements.txt + runpod）
+# ✅ 關鍵修正：flash-attn 必須獨立安裝並使用 no-build-isolation
 RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-build-isolation flash-attn && \
     pip install --no-cache-dir runpod requests
 
 # 🌐 RunPod Serverless 預設使用 port 5000
