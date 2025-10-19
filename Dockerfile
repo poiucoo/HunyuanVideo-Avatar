@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 ENV PYTHONUNBUFFERED=1
 
-# 🧩 安裝必要套件（包含 git、build-essential、ffmpeg、curl）
+# 🧩 安裝必要系統套件
 RUN apt-get update && apt-get install -y \
     git \
     build-essential \
@@ -23,7 +23,7 @@ COPY . /workspace
 
 # 🐍 安裝 PyTorch GPU 對應版本（CUDA 12.1）
 RUN pip install --upgrade pip setuptools wheel && \
-    pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
+    pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
 
 # 📦 分階段安裝依賴，降低錯誤率
 RUN pip install --prefer-binary -r requirements.txt
