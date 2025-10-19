@@ -4,6 +4,9 @@ requests==2.31.0
 fastapi==0.103.1
 uvicorn==0.23.2
 
+# === 深度學習基礎環境（移除重複於 Dockerfile 的 torch 套件）===
+# torch, torchvision, torchaudio 由 Dockerfile 安裝，避免版本衝突
+
 # === 模型與推理工具 ===
 diffusers==0.28.2
 transformers==4.38.1
@@ -30,3 +33,6 @@ loguru==0.7.2
 einops==0.7.0
 tomlkit==0.12.2
 
+# === 注意 ===
+# FlashAttention 不放這裡安裝，改由 Dockerfile 明確安裝：
+# pip install "flash-attn>=2.4,<2.6" --extra-index-url https://flash-attn-builds.s3.amazonaws.com/whl/cu121/torch2.1/
