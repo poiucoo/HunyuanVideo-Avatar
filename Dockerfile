@@ -27,7 +27,7 @@ RUN pip install --upgrade pip setuptools wheel && \
 
 # 📦 分階段安裝依賴，降低錯誤率
 RUN pip install --prefer-binary -r requirements.txt
-RUN pip install flash-attn==2.5.9.post1 --no-build-isolation --prefer-binary
+RUN pip install flash-attn==2.4.2.post1 --no-build-isolation --prefer-binary
 RUN pip install runpod requests
 
 # 🌐 RunPod Serverless 預設使用 port 5000
