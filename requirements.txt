@@ -4,11 +4,6 @@ requests==2.31.0
 fastapi==0.103.1
 uvicorn==0.23.2
 
-# === 深度學習環境 ===
-torch==2.1.0
-torchvision==0.16.0
-torchaudio==2.1.0
-
 # === 模型與推理工具 ===
 diffusers==0.28.2
 transformers==4.38.1
