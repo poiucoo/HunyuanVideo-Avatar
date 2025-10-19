@@ -6,9 +6,10 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV TZ=Etc/UTC
 ENV PYTHONUNBUFFERED=1
 
-# 🧩 安裝必要套件（包含 ffmpeg、curl）
+# 🧩 安裝必要套件（含 git、build-essential、ffmpeg、curl）
 RUN apt-get update && apt-get install -y \
     git \
+    build-essential \
     ffmpeg \
     curl \
     libsm6 \
@@ -24,12 +25,10 @@ COPY . /workspace
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir torch==2.1.0 torchvision==0.16.0 --index-url https://download.pytorch.org/whl/cu121
 
-# 📦 安裝依賴（requirements.txt + runpod）
-# ✅ 不再自行編譯 flash-attn，而是用預編譯版
-RUN apt-get update && apt-get install -y git && \
-    pip install --no-cache-dir -r requirements.txt && \
-    pip install --no-cache-dir flash-attn --extra-index-url https://flash-attn-builds.s3.amazonaws.com/whl/cu121/torch2.1/ && \
-    pip install --no-cache-dir runpod requests
+# 📦 安裝依賴（拆分階段以避免單點錯誤）
+RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir flash-attn --extra-index-url https://flash-attn-builds.s3.amazonaws.com/whl/cu121/torch2.1/
+RUN pip install --no-cache-dir runpod requests
 
 # 🌐 RunPod Serverless 預設使用 port 5000
 EXPOSE 5000
