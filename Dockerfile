@@ -29,10 +29,14 @@ RUN pip install --upgrade pip setuptools wheel && \
 RUN pip install --prefer-binary -r requirements.txt
 RUN pip install --no-cache-dir runpod==1.4.0 requests==2.31.0
 
-# ⚡ 加入 FlashAttention 的 Dummy Fallback
-# （確保匯入 flash_attn 時不報錯）
+# ⚡ 建立 FlashAttention 的 Dummy 模組
+# （確保 import flash_attn.* 不報錯）
 RUN mkdir -p /workspace/flash_attn && \
-    echo "def flash_attn_func(*args, **kwargs):\n    raise NotImplementedError('FlashAttention disabled. Using PyTorch native attention instead.')" > /workspace/flash_attn/__init__.py
+    echo "def flash_attn_func(*args, **kwargs):\n    raise NotImplementedError('FlashAttention disabled. Using PyTorch native attention instead.')\n\n" > /workspace/flash_attn/__init__.py && \
+    echo "def flash_attn_varlen_func(*args, **kwargs):\n    raise NotImplementedError('FlashAttention disabled.')\n\n" >> /workspace/flash_attn/__init__.py && \
+    echo "def flash_attn_unpadded_func(*args, **kwargs):\n    raise NotImplementedError('FlashAttention disabled.')\n\n" >> /workspace/flash_attn/__init__.py && \
+    mkdir -p /workspace/flash_attn/flash_attn_interface && \
+    echo 'def flash_attn_varlen_func(*a, **k): raise NotImplementedError("FlashAttention disabled")' > /workspace/flash_attn/flash_attn_interface/__init__.py
 
 # 🌐 RunPod Serverless 預設使用 port 5000
 EXPOSE 5000
